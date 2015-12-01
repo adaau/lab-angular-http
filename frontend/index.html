@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="CriminalsApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Infamous Criminals</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/criminalsController.js"></script>
+</head>
+<body>
+  <section ng-controller="CriminalsController">
+    <h1>Infamous Criminals</h1>
+
+    <ul id="criminals">
+      <li ng-repeat="criminal in all">
+        {{ criminal.name }}, {{ criminal.location }}, {{ criminal.status }}
+        <button class="btn-criminal" ng-click="showCriminal(criminal)">Edit</button>
+        <button class="btn-criminal" ng-click="removeCriminal(criminal)">x</button>
+      </li>
+    </ul>
+
+    <form class="form-criminal" ng-submit="addCriminal()">
+      <h4>Add Criminal</h4>
+      <div>
+        <label for="new-criminal-name">Name: </label>
+        <input type="text" id="new-criminal-name" ng-model="newCriminal.name">
+      </div>
+
+      <div>
+        <label for="new-criminal-location">Location: </label>
+        <input type="text" id="new-criminal-location" ng-model="newCriminal.location">
+      </div>
+
+      <div>
+        <label for="new-criminal-status">Status: </label>
+        <select name="status" id="new-criminal-status" ng-model="newCriminal.status">
+          <option selected disabled>- - Please Select One - -</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+
+      <div>
+        <input type="submit" value="Add Criminal">
+      </div>
+    </form>
+
+    <form class="form-criminal" ng-submit="editCriminal()">
+      <h4>Edit Criminal</h4>
+      <div>
+        <label for="edit-criminal-name">Name: </label>
+        <input type="text" id="edit-criminal-name" ng-model="editCriminal.name">
+      </div>
+
+      <div>
+        <label for="edit-criminal-location">Location: </label>
+        <input type="text" id="edit-criminal-location" ng-model="editCriminal.location">
+      </div>
+
+      <div>
+        <label for="edit-criminal-status">Status: </label>
+        <select name="status" id="edit-criminal-status" ng-model="editCriminal.status">
+          <option selected disabled>- - Please Select One - -</option>
+          <option value="alive">Alive</option>
+          <option value="dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+
+      <div>
+        <input type="submit" value="Edit Criminal">
+      </div>
+    </form>
+
+  </section>
+</body>
+</html>
