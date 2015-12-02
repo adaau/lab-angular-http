@@ -4,20 +4,12 @@ angular.module('CriminalsApp')
 
     $scope.newCriminal    = {};
     $scope.addCriminal    = addCriminal;
+    $scope.showCriminal   = showCriminal;
     $scope.editCriminal   = {};
     $scope.updateCriminal = updateCriminal;
     $scope.removeCriminal = removeCriminal;
 
     getCriminals();
-    function addCriminal() {
-      $http
-        .post('http://localhost:3000/criminals', $scope.newCriminal)
-        .success(function(data) {
-          getCriminals();
-        });
-      $scope.newCriminal = {};
-    };
-
 
     function getCriminals() {
       $http
@@ -27,16 +19,26 @@ angular.module('CriminalsApp')
         })
     };
 
-    $scope.showCriminal = function(criminal) {
+    function addCriminal() {
+      $http
+        .post('http://localhost:3000/criminals', $scope.newCriminal)
+        .success(function(data) {
+          getCriminals();
+        });
+      $scope.newCriminal = {};
+    };
+
+    function showCriminal(criminal) {
       $scope.editCriminal = criminal;
     }
 
-    function updateCriminal(criminal) {
+    function updateCriminal() {
       $http
-        .put('http://localhost:3000/criminals/' + criminal._id, $scope.editCriminal)
+        .patch('http://localhost:3000/criminals/' + $scope.editCriminal._id, $scope.editCriminal)
         .success(function(data) {
           getCriminals();
-        })
+        });
+      $scope.editCriminal = {};
     };
 
     function removeCriminal(criminal) {
